@@ -1,0 +1,83 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+#define lli long long int
+#define ulli unsigned long long int
+#define MOD 1000000007
+int binarySearch(int *arr,int key,int start,int end)
+{
+    //int start=0,end=n-1;
+    while(start<=end)
+    {
+        int mid=(start+end)/2;
+        if(arr[mid]==key)
+            return mid;
+        else if(arr[mid]>key)
+        {
+            end=mid-1;
+        }
+        else
+        {
+            start=mid+1;
+        }
+    }
+    return -1;
+
+}
+
+
+void solve(int* arr,int n){//nlogn,n
+    int cnt=0; int b[n];
+    for(int i=0;i<n;i++){
+        b[i]=i+1;
+    }
+    int left=0,right=n-1;
+    int initIdx;
+    for(int i=0;i<n-1;i++){
+        if(arr[i] != b[i]){
+            initIdx= binarySearch(b,arr[i],left,right);
+            //initIdx= linSearch(b,arr[i],n);//tle dega..............
+            if(initIdx-i > 2){
+                cout<<"Too chaotic"<<endl;
+                return;
+            }
+            else if(initIdx-i <= 2 and initIdx-i > 0){
+                cnt += initIdx-i;
+                //swap initIdx-i positions to the right
+                if(initIdx-i == 2){
+                    b[i+2]=b[i+1];
+                    b[i+1]=b[i];
+                    b[i]=arr[i];
+                }
+                else if(initIdx-i == 1){
+                    swap(b[i],b[initIdx]);
+                }
+
+            }
+        }
+        left++;
+    }
+    cout<<cnt<<endl;
+}
+
+
+int main()
+{
+        int test; cin>>test;
+        while(test--){
+            int n;
+            cin>>n;
+            int arr[n];
+            for(int i=0;i<n;i++){
+                cin>>arr[i];
+            }
+            solve(arr,n);
+
+        }
+
+
+
+
+}
+
+
