@@ -1,0 +1,71 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+#define lli long long int
+#define ulli unsigned long long int
+#define MOD 1000000007
+ulli sumDigits(ulli num){//logn
+    ulli sum=0;
+    while(num >0){
+        ulli r= num%10;
+        sum += r;
+        num=num/10;
+    }
+    return sum;
+}
+
+ulli sumDigits2(string num){//logn
+    ulli sum=0;
+    for(int i=0;i<num.length();i++){
+        sum += (num[i]-'0');
+    }
+    return sum;
+}
+
+ulli solve(string n,ulli k){
+//    string res;
+//    string num= to_string(n);
+//    for(ulli i=1;i<=k;i++){//k
+//        res += num;
+//    }
+    //cout<<res<<endl;
+
+    //ulli p= stoll(res);//123 123 123
+    ulli p = k*sumDigits2(n);
+    //cout<<p<<endl;
+
+    while( sumDigits(p)/10 != 0){//tc??????????????????????????????????
+        p= sumDigits(p) ;
+    }
+    ulli ans=sumDigits(p);//ans is now a super digit
+    return ans;
+
+}
+
+ulli superDigitRec(ulli n,ulli k){
+    if(n<10){
+        return n;
+    }
+
+
+    return superDigitRec(sumDigits(n),k);
+
+}
+
+int main()
+{
+
+            ulli k;
+            string n;
+            cin>>n>>k;
+            //cout<<solve(n,k)<<endl;
+             ulli p = k*sumDigits2(n);
+            cout<<superDigitRec(p,k)<<endl;
+
+
+
+
+
+}
+
+
