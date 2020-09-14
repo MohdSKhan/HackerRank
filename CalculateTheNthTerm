@@ -1,0 +1,42 @@
+//using loop
+#include<bits/stdc++.h>
+using namespace std;
+int Nth(int n, int a, int b, int c) {
+    int sum=0;
+    if(n==1)
+        return a;
+    else if(n==2)
+        return b;
+    else if(n==3)
+        return c;
+    else
+    {
+        if(n>3)
+        {
+            for(int i=1;i<=n;i++)
+            {
+                sum=a+b+c;
+                a=b;
+                b=c;
+                c=sum;
+            }
+            return sum;
+        }
+        else
+        {
+            cout<<"enter a valid value of N!!!"<<endl;
+            //return -111;
+        }
+
+    }
+
+}
+
+int main() {
+    int n=5, a=1, b=2, c=3;//n=7
+   // cin>>n>>a>>b>>c;
+    cout<<Nth(n,a,b,c)<<endl;
+   // return 0;
+}
+
+
