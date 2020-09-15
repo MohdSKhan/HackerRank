@@ -1,0 +1,40 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+#define lli long long int
+#define ulli unsigned long long int
+#define MOD 1000000007
+int main()
+{
+
+            int n;  cin>>n; string str; cin>>str;
+            int distFromSeaLevel=0, numValley=0; bool valleyStart=false;
+            for(int i=0;i<n;i++){
+                if(distFromSeaLevel==0 and str[i]=='U'){
+                    valleyStart=false;
+                    distFromSeaLevel++;
+                }
+                else if(distFromSeaLevel==0 and str[i]=='D'){
+                    valleyStart=true;
+                    distFromSeaLevel--;
+                }
+                else if(str[i]=='U'){
+                    distFromSeaLevel++;
+                }
+                else if(str[i]=='D'){
+                    distFromSeaLevel--;
+                }
+                if(distFromSeaLevel==0 and valleyStart){
+                    numValley++;
+                }
+            }
+
+            cout<<numValley<<endl;
+
+
+
+
+
+}
+
+
