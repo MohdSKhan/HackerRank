@@ -1,0 +1,46 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+#define lli long long int
+#define ulli unsigned long long int
+#define MOD 1000000007
+ulli solve(string str,ulli n){
+
+    int cnt=0;  int len=str.length();
+    if(n<len){
+        len=n;
+    }
+    for(int i=0;i<len;i++){//o(len)
+        if(str[i]=='a'){
+            cnt++;
+        }
+    }
+    if(len==n){
+        return cnt;
+    }
+
+    int cntA=0;
+    for(int i=0;i< (n%len) ;i++){
+        if(str[i]=='a'){
+            cntA++;
+        }
+    }
+    ulli ans=  (n/len)*cnt + cntA ;
+    return ans;
+
+}
+
+
+int main()
+{
+            string str; cin>>str;
+            ulli n;
+            cin>>n;
+            cout<<solve(str,n)<<endl;
+
+
+
+
+}
+
+
