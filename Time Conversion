@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+/*
+ * Complete the timeConversion function below.
+ */
+string timeConversion(string s) {
+    string ans;
+    int len= s.length();
+    string rest= s.substr(2,6);
+    string hh= s.substr(0,2);
+    int hours= stoi(hh);
+
+    if(s[len-2]=='A'){//am
+        if(hours==12){
+            return ("00"+rest);
+        }
+        return (hh+rest);
+    }
+    else{//pm
+        if(hours==12){
+            return (hh+rest);
+        }
+        hh= to_string(hours+12);
+        return (hh+rest);
+    }
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string s;
+    getline(cin, s);
+
+    string result = timeConversion(s);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
