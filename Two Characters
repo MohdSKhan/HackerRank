@@ -1,0 +1,61 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+#define lli long long int
+#define ulli unsigned long long int
+#define MOD 1000000007
+int alternate(string s) {
+    unordered_map <char,int> mp;
+    for(long unsigned int i=0;i<s.length();i++){//n
+        mp[s[i]]++;
+    }
+    vector<char> v;
+    for(auto it: mp){//constant as this may contain at max 26 char only
+        v.push_back(it.first);
+    }
+//    for(int i=0;i<v.size();i++){
+//        cout<<v[i]<<" ";
+//    }cout<<endl;
+    int maxlen=0;
+
+    for(long unsigned int i=0;i<v.size();i++){//constant???????????????
+        for(long unsigned int j=i+1;j<v.size();j++){//constant?????????
+            string ans="";
+            for(long unsigned int k=0;k<s.length();k++){//n????????????
+                if(s[k]==v[i] or s[k]==v[j]){
+                    ans += s[k];
+                }
+            }
+            //cout<<"ans is: "<<ans<<endl;
+            //check for alternate chars
+            long unsigned int y;
+            for(y=1;y<ans.length();y++){
+                if(ans[y]==ans[y-1]){
+                    break;
+                }
+            }
+            if(y==ans.length()){
+                int size= ans.length();
+                maxlen=max(maxlen,size);
+            }
+        }
+    }
+    return maxlen;
+
+
+
+}
+int main()
+{
+            int test;   cin>>test;
+            while(test--){
+                 int n;
+                cin>>n;
+                string s;
+                cin>>s;
+                cout<<alternate(s)<<endl;
+            }
+}
+
+
+
