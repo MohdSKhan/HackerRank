@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void kaprekarNumbers(int p, int q) {
+    int flag=0;
+    for(long num=p;num<=q;num++){
+        long square= num*num;
+        string str = to_string(square);
+        long length= str.length();
+        //long d= countDigits(square);
+        string left= str.substr(0, length/2);//d
+        string right= str.substr(length/2);//d
+        int leftNum=0;
+        if(left.length()!=0){
+            leftNum= stoi(left);//d
+        }
+
+        int rightNum= stoi(right);//d
+        if(leftNum + rightNum == num){
+            cout<<num<<" ";
+            flag=1;
+        }
+    }
+    if(flag==0){
+        cout<<"INVALID RANGE"<<endl;
+    }
+
+}
+
+int main()
+{
+    int p;
+    cin >> p;
+
+
+    int q;
+    cin >> q;
+
+    kaprekarNumbers(p, q);
+
+    return 0;
+}
