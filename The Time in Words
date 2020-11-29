@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the timeInWords function below.
+string arr[29]={"one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen",
+        "fourteen",
+        "fifteen",
+        "sixteen",
+        "seventeen",
+        "eighteen",
+        "nineteen",
+        "twenty",
+        "twenty one",
+        "twenty two",
+        "twenty three",
+        "twenty four",
+        "twenty five",
+        "twenty six",
+        "twenty seven",
+        "twenty eight",
+        "twenty nine"};
+string timeInWords(int h, int m) {
+    string ans;
+    if(m==0){
+        ans = (arr[h-1]) + " o' clock";
+    }
+    else if(m>=1 and m<=30){
+        if(m==15){
+            ans = "quarter past " + (arr[h-1]) ;
+        }
+        else if(m==30){
+            ans = "half past " + (arr[h-1]) ;
+        }
+        else if(m==1){
+            ans = arr[0] + " minute past " + (arr[h-1]) ;
+        }
+        else{
+            ans = arr[m-1] + " minutes past " + (arr[h-1]) ;
+        }
+    }
+    else{
+        if(h==12){
+            if(m==45){
+                ans = "quarter to " + (arr[0]) ;
+            }
+            else if(m==59){
+                ans = arr[0] +  " minute to " + (arr[0]) ;
+            }
+            else{
+                ans = arr[59-m] +  " minutes to " + (arr[0]) ;
+            }
+        }
+        else{
+            if(m==45){
+                ans = "quarter to " + (arr[h]) ;
+            }
+            else{
+                ans = arr[59-m] +  " minutes to " + (arr[h]) ;
+            }
+        }
+        
+    }
+    return ans;
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int h;
+    cin >> h;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    int m;
+    cin >> m;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    string result = timeInWords(h, m);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
