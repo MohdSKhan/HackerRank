@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the weightedUniformStrings function below.
+vector<string> weightedUniformStrings(string s, vector<int> queries) {
+    int n= queries.size();
+    int len= s.length();
+    int cnt=1;
+    vector<string> ans;
+    unordered_map<int,int> mp;
+    for(int i=0;i<len;i++){
+        if(s[i] != s[i+1] and i+1 < len){
+            //set.insert(s[i]-'a'+1)*cnt;
+            mp[(s[i]-'a'+1)*cnt]++;
+            cnt=1;
+        }
+        else{
+            //set.insert(s[i]-'a'+1)*cnt;
+            mp[(s[i]-'a'+1)*cnt]++;
+            cnt++;
+        }
+    }
+
+    for(int i=0;i<n;i++){
+        if(mp.count(queries[i])){
+        //if(set.find(queries[i])){
+            ans.push_back("Yes");
+        }
+        else{
+            ans.push_back("No");
+        }
+    }
+    return ans;
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string s;
+    getline(cin, s);
+
+    int queries_count;
+    cin >> queries_count;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    vector<int> queries(queries_count);
+
+    for (int i = 0; i < queries_count; i++) {
+        int queries_item;
+        cin >> queries_item;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        queries[i] = queries_item;
+    }
+
+    vector<string> result = weightedUniformStrings(s, queries);
+
+    for (int i = 0; i < result.size(); i++) {
+        fout << result[i];
+
+        if (i != result.size() - 1) {
+            fout << "\n";
+        }
+    }
+
+    fout << "\n";
+
+    fout.close();
+
+    return 0;
+}
