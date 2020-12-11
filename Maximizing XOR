@@ -1,0 +1,50 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+#define lli long long int
+#define ulli unsigned long long int
+#define MOD 1000000007
+//o(logn) approach
+//An efficient solution is to consider pattern of binary values from L to R. We can see that first bit
+// from L to R either changes from 0 to 1 or it stays 1 i.e. if we take the XOR of any two numbers for maximum
+// value their first bit will be fixed which will be same as first bit of XOR of L and R itself.
+//After observing the technique to get first bit, we can see that if we XOR L and R, the most significant bit of
+// this XOR will tell us the maximum value we can achieve i.e. let XOR of L and R is 1xxx where x can be 0 or 1 then
+//  maximum XOR value we can get is 1111 because from L to R we have all possible combination of xxx and it is always
+//   possible to choose these bits in such a way from two numbers such that their XOR becomes all 1. It is explained
+//   below with some examples,
+int solveOpt(int x,int y){//logn
+            int ans=1;
+            int currXor= x^y;//pos of msb of currXor decides the maxXor....if pos of msb is 3 from right].then 111 is maxXor
+                            //in binary format
+            int msbPos=0;
+            while(currXor >0){
+                msbPos++;
+                currXor = currXor>>1;
+            }
+            for(int i=1;i<=msbPos;i++){
+                ans= ans<<1;
+            }
+            return ans-1;
+}
+
+int solve(int x,int y){//n^2
+            int ans=0;
+            for(int i=x;i<=y-1;i++){//n^2
+                for(int j=x+1;j<=y;j++){
+                    ans = max(ans,i^j);
+                }
+            }
+            return ans;
+}
+int main()
+{
+
+            int x,y;
+            cin>>x>>y;
+            //cout<<solve(x,y)<<endl;
+            cout<<solveOpt(x,y)<<endl;
+
+
+}
+
